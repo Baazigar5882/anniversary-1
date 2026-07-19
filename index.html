@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>A & I — The Eternal Horizon</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;700&family=Montserrat:wght@200;400;500&family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Space Starfield Background Layer -->
+    <canvas id="sparkleCanvas"></canvas>
+    
+    <!-- Full Screen Custom Uploaded Sky Image Background Underlay -->
+    <div id="customSkyImageBackdrop" class="sky-image-underlay"></div>
+
+    <!-- PRECISE HORIZONTAL SWEEP CLOUD TRANSITION WIPES -->
+    <div id="cloudTransitionCurtain" class="cloud-curtain">
+        <div class="cloud-layer left-cloud"></div>
+        <div class="cloud-layer right-cloud"></div>
+    </div>
+
+    <!-- DYNAMIC SCROLL CONTAINER (Home Ecosystem) -->
+    <div class="scroll-container" id="landingContainer">
+        
+        <!-- MODULE 1: THE COUNTDOWN SEAL CARDS -->
+        <section class="scroll-section splash-bg" id="countdownSection">
+            <div class="glass-seal-card animate-fade-in" id="sealCard">
+                <div class="initials-badge">A & I</div>
+                <p class="seal-subtitle">THE CHRONICLE OF US</p>
+                
+                <div id="timerInteractiveZone">
+                    <h1 class="main-announcement" id="countdownHeadline">Something beautiful is kept for you</h1>
+                    <div class="countdown-grid" id="countdownGrid">
+                        <div class="time-box"><span id="days">00</span><label>DAYS</label></div>
+                        <div class="time-box"><span id="hours">00</span><label>HOURS</label></div>
+                        <div class="time-box"><span id="minutes">00</span><label>MINS</label></div>
+                        <div class="time-box"><span id="seconds">00</span><label>SECS</label></div>
+                    </div>
+                </div>
+                
+                <p class="footer-note">The vault opens automatically at midnight.</p>
+                <div class="scroll-hint">▼ Scroll Down to Play the Arcade ▼</div>
+            </div>
+        </section>
+
+        <!-- MODULE 2: INTERACTIVE HOMEPAGE MAIN ARCADE STAGE -->
+        <section class="scroll-section arcade-bg">
+            <div class="game-wrapper context-home">
+                <div class="game-meta">
+                    <h2>Melody of Hearts</h2>
+                    <p>Strike the dropping rhythm bars right on the gold line!</p>
+                </div>
+                
+                <div id="homeGameViewport" class="piano-board">
+                    <div id="homeHeartsContainer" class="game-hearts-overlay">
+                        <span id="homeHeart1">❤️</span><span id="homeHeart2">❤️</span><span id="homeHeart3">❤️</span>
+                    </div>
+                    
+                    <div class="piano-lane home-lane" data-lane="0" id="homeLane0"><span class="key-bind">A</span></div>
+                    <div class="piano-lane home-lane" data-lane="1" id="homeLane1"><span class="key-bind">S</span></div>
+                    <div class="piano-lane home-lane" data-lane="2" id="homeLane2"><span class="key-bind">D</span></div>
+                    <div class="piano-lane home-lane" data-lane="3" id="homeLane3"><span class="key-bind">F</span></div>
+                    
+                    <div class="judgment-line"></div>
+                    <div class="lose-line"></div>
+                    
+                    <div id="homeGameTutorial" class="tutorial-overlay">
+                        <div class="tutorial-content">
+                            <h3>Rhythm Arcade 🎹</h3>
+                            <p>Press keys <strong>A, S, D, F</strong> or tap lanes directly on your phone.</p>
+                            <button id="closeHomeTutorialBtn" class="premium-btn gold">Start Game</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="game-controls-row">
+                    <div class="score-display">Score: <span id="homeGameScore">0</span></div>
+                    <button id="homeActionGameBtn" class="premium-btn rose">Start Song</button>
+                </div>
+
+                <div class="leaderboard-box id-home-board" style="display: none;">
+                    <h4>✨ Global Legends ✨</h4>
+                    <ul id="homeLeaderboardView"></ul>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- PHASE 2: MAIN HORIZON JOURNEY ENVIRONMENT DECK -->
+    <div id="horizonDashboard" class="horizon-screen-container">
+        
+        <!-- VERTICAL SCROLL SNAP FRAME FOR PRE-FLIGHT JOURNEY CARDS -->
+        <div class="dashboard-scroll-snapper" id="dashboardSnapper">
+            
+            <!-- STAGE 2A: CONGRATULATIONS & WELCOME PROTOCOL CARD -->
+            <section class="snap-viewport-view" id="welcomeMessageViewport">
+                <div class="glass-seal-card splash-welcome-panel">
+                    <div class="initials-badge mini-gold">✨</div>
+                    <h2 class="romantic-heading text-center-forced">Welcome Beautiful Hearts</h2>
+                    
+                    <div class="welcome-chronicle-text-box">
+    <p>Welcome beautiful hearts to the anniversary of AKASHI AND HIMANSHU! Today marks a full year since two souls beautifully aligned, setting off on a shared orbit of laughter, devotion, and quiet strength. Witnessing their past 365 days is like watching a magnificent masterpiece write itself—a brilliant chronicle built on unwavering support and deep friendship.</p>
+    <br>
+    <p>As they stand hand-in-hand on the baseline threshold of this eternal horizon, their bond shines as an inspiring testament to what it truly means to be soulmates. Step inside, explore the hand-woven memories of their journey so far, and celebrate the magic of a love destined for eternity.</p>
+    <br>
+    <p>Thank you for being an indispensable chapter in our story ecosystem. Your presence infuses our milestones with ultimate meaning.</p>
+</div>
+                    
+                    <div class="scroll-hint dynamic-glow-hint">▼ Scroll down to start the journey ▼</div>
+                </div>
+            </section>
+
+            <!-- STAGE 2B: SKY MACHINE EMBARKATION LAUNCH ENVIRONMENT -->
+            <section class="snap-viewport-view" id="spaceshipControlsViewport">
+                <!-- Floating Flying Machine Container -->
+                <div id="skyMachineWrapper" class="sky-machine-float">
+                    <div class="flying-machine-graphics" id="skyMachineBtn">
+                        🛸
+                        <span class="machine-glow"></span>
+                        <div class="engine-thruster-fire"></div>
+                    </div>
+                    <p class="machine-hint-text">Click to Fly to Guest Cards</p>
+                </div>
+            </section>
+        </div>
+
+        <!-- Onboarding Details Dialog Popcard -->
+        <div id="onboardingOverlay" class="horizon-modal-box">
+            <div class="horizon-card-body">
+                <h3>Embarkation Details ✈️</h3>
+                <p>Provide your name to map your custom constellation path:</p>
+                <input type="text" id="guestNameInput" placeholder="Enter your first name..." class="aesthetic-input" autocomplete="off">
+                
+                <p class="music-prompt-label">Select Your Soundtrack Theme:</p>
+                
+                <!-- JUKEBOX SOUND LIST WRAPPER CONTAINER -->
+                <div id="onboardingMusicQueueList" class="music-selection-grid">
+                    <!-- Loaded dynamically via script engines to enforce Baazigar edits -->
+                </div>
+
+                <!-- BAAZIGAR AUDIO MANAGEMENT SUITE INPUT HOOKS -->
+                <div id="baazigarJukeboxControlsZone" class="baazigar-audio-manager-box" style="display: none;">
+                    <label>Add New Track From Phone Storage:</label>
+                    <input type="file" id="baazigarAudioFileInput" accept="audio/*" style="display: none;">
+                    <button id="triggerAudioFilePickerBtn" class="premium-btn rose full-width" style="padding: 8px 12px; font-size: 0.75rem; margin-top: 5px;">➕ Upload Custom Audio</button>
+                </div>
+                
+                <button id="submitOnboardingBtn" class="premium-btn gold full-width" style="margin-top: 15px;">Launch Flight Paths</button>
+            </div>
+        </div>
+
+        <!-- PHASE 4: PPT PRESENTATION DECK -->
+        <div id="journalSlideshowContainer" class="journal-slide-view">
+            <div class="slide-card glass-seal-card">
+                
+                <!-- INLINE ADMINISTRATIVE EDITOR HOOKS -->
+                <div class="inline-admin-controls">
+                    <button id="toggleInlineEditBtn" class="admin-edit-toggle-btn">🔧 Inline Custom Edit</button>
+                    <button id="addNewGuestCardBtn" class="admin-add-card-btn">➕ Add Guest</button>
+                    <button id="deleteGuestCardBtn" class="admin-add-card-btn" style="border-color: #ff4d4d; color: #ff4d4d;">🗑️ Delete Card</button>
+                </div>
+
+                <div class="slide-content-layout">
+                    <div class="slide-graphic-box">
+                        <img id="slideGuestPhoto" src="" alt="Guest Memory Frame">
+                    </div>
+                    <div class="slide-text-box">
+                        <h2 id="slideGuestTitle" class="romantic-heading">Guest Card</h2>
+                        <div class="chronicle-text-scroll-container">
+                            <p id="slideGuestMessage">Message content goes here...</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- INLINE INPUT HOOKS FOR AUTHORIZED MASTER LOGINS -->
+<div id="inlineEditorFormWrapper" class="inline-editor-form-box">
+    <label>Upload Photo From Phone Storage:</label>
+    <input type="file" id="editCardPhotoFileInput" accept="image/*" style="display: none;">
+    <button id="triggerFilePickerBtn" class="premium-btn rose full-width" style="margin-bottom: 12px; font-size: 0.8rem; padding: 8px 15px;">📁 Choose Image File</button>
+    <span id="fileSelectionFeedback" style="display: block; font-size: 0.75rem; text-align: center; color: var(--champagne-gold); margin-bottom: 10px; font-style: italic;">No file selected</span>
+
+    <label>Modify Card Thank-You Chronicle Paragraph:</label>
+    <textarea id="editCardMsgTextarea" rows="3"></textarea>
+    <button id="saveInlineChangesBtn" class="premium-btn gold full-width">Apply Card Upgrades</button>
+</div>
+                
+                <div class="slideshow-controls">
+                    <button id="nextSlideBtn" class="premium-btn gold round-nav">➔</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- PHASE 4B: DYNAMIC INTERSTITIAL FORM FOR UNKNOWN GUESTS -->
+        <div id="unknownGuestEnrollmentStage" class="journal-slide-view">
+            <div class="slide-card glass-seal-card">
+                <h2 class="romantic-heading">Be Part of Our Story ✨</h2>
+                <p style="font-size: 0.85rem; color: var(--soft-rose); margin-bottom: 20px;">We would love to remember you across our eternal timeline landscape!</p>
+                
+                <div class="unknown-form-layout" style="text-align: left; width: 100%;">
+                    <label style="font-size: 0.8rem; color: var(--champagne-gold); display: block; margin-bottom: 6px;">Add Your Photograph:</label>
+                    <input type="file" id="unknownGuestFileInput" accept="image/*" style="display: none;">
+                    <button id="unknownFileSelectBtn" class="premium-btn rose full-width" style="padding: 10px; font-size: 0.8rem; margin-bottom: 15px;">📷 Choose Photo From Device</button>
+                    <span id="unknownFileFeedback" style="display: block; font-size: 0.75rem; color: var(--soft-rose); text-align: center; margin-bottom: 15px; font-style: italic;">No file selected</span>
+
+                    <label style="font-size: 0.8rem; color: var(--champagne-gold); display: block; margin-bottom: 6px;">Your Chronicle Message:</label>
+                    <textarea id="unknownGuestMsgTextarea" rows="4" style="width: 100%; padding: 12px; background: rgba(0,0,0,0.4); border: 1px solid var(--champagne-gold); border-radius: 12px; color: white; font-size: 0.9rem; outline: none; resize: none;"></textarea>
+                </div>
+
+                <button id="submitUnknownGuestBtn" class="premium-btn gold full-width" style="margin-top: 25px; font-size: 0.95rem; padding: 14px;">Let us do the honour</button>
+            </div>
+        </div>
+
+        <!-- PHASE 4C: CONGRATULATIONS CELEBRATION BOX CARD OVERLAY -->
+        <div id="unknownSuccessOverlay" class="horizon-modal-box" style="text-align: center;">
+            <div class="horizon-card-body">
+                <div style="font-size: 3.5rem; margin-bottom: 10px;">💖</div>
+                <h3>Honour Enlisted!</h3>
+                <p style="margin-bottom: 25px;">You are now woven into the beautiful tapestry of our story timeline forever.</p>
+                <button id="unknownLandBtn" class="premium-btn gold full-width">🎮 Land to Game</button>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- PHASE 5: THE STANDALONE ARCADE FINAL ENVIRONMENT STAGE -->
+    <div id="standaloneArcadeStage" class="arcade-final-viewport">
+        <div class="game-wrapper">
+            <div class="game-meta">
+                <h2>Melody of Hearts 🎹</h2>
+                <p>Strike the dropping rhythm bars right on the center golden line!</p>
+            </div>
+            
+            <div id="gameViewport" class="piano-board">
+                <div id="heartsContainer" class="game-hearts-overlay">
+                    <span id="heart1">❤️</span><span id="heart2">❤️</span><span id="heart3">❤️</span>
+                </div>
+                
+                <div class="piano-lane final-lane" data-lane="0" id="lane0"><span class="key-bind">A</span></div>
+                <div class="piano-lane final-lane" data-lane="1" id="lane1"><span class="key-bind">S</span></div>
+                <div class="piano-lane final-lane" data-lane="2" id="lane2"><span class="key-bind">D</span></div>
+                <div class="piano-lane final-lane" data-lane="3" id="lane3"><span class="key-bind">F</span></div>
+                
+                <div class="judgment-line"></div>
+                <div class="lose-line"></div>
+                
+                <div id="gameTutorial" class="tutorial-overlay">
+                    <div class="tutorial-content">
+                        <h3>Final Rhythm Challenge</h3>
+                        <p>Press keys <strong>A, S, D, F</strong>. Keep your score legendary!</p>
+                        <button id="closeTutorialBtn" class="premium-btn gold">Begin Session</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="game-controls-row">
+                <div class="score-display">Score: <span id="gameScore">0</span></div>
+                <button id="actionGameBtn" class="premium-btn rose">Start Song</button>
+            </div>
+
+            <div class="leaderboard-box id-final-board" style="display: none;">
+                <h4>✨ Global Legends ✨</h4>
+                <ul id="leaderboardView"></ul>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

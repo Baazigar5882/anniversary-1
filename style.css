@@ -1,0 +1,1023 @@
+/* ==========================================================================
+   1. CORE DESIGN SPECIFICATIONS & THEME CONSTANTS
+   ========================================================================== */
+:root {
+    --velvet-wine: #3d1326;
+    --warm-blush: #fceade;
+    --soft-rose: #e8a598;
+    --champagne-gold: #dfc095;
+    --pure-white: #ffffff;
+    --text-dark: #2c161f;
+    --text-light: #fbeee6;
+    --glass-fill: rgba(61, 19, 38, 0.65);
+    --glass-border: rgba(223, 192, 149, 0.35);
+}
+
+/* ==========================================================================
+   2. GLOBAL ARCHITECTURE & MOBILE OVERLAY SAFETY RESETS
+   ========================================================================== */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Montserrat', sans-serif;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+}
+
+body, html {
+    height: 100%;
+    width: 100%;
+    background-color: var(--velvet-wine);
+    color: var(--text-light);
+    overflow: hidden;
+    position: relative;
+    font-size: 16px;
+}
+
+/* ==========================================================================
+   3. COSMIC CANVAS LAYER & FIXED ASSET IMAGE BACKDROPS
+   ========================================================================== */
+#sparkleCanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.sky-image-underlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-image: url('sky_bg.jpg'); 
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    z-index: 2;
+}
+
+/* ==========================================================================
+   4. FULL VIEWPORT SLIDING WIPE CLOUD CURTAIN PIPELINES
+   ========================================================================== */
+.cloud-curtain {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    pointer-events: none;
+    z-index: 2000;
+}
+
+.cloud-layer {
+    width: 50vw;
+    height: 100vh;
+    background: #fbeee6;
+    transition: transform 1.1s cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+.left-cloud {
+    transform: translateX(-100%);
+    border-radius: 0 40% 40% 0 / 0 50% 50% 0;
+    box-shadow: 15px 0 30px rgba(0, 0, 0, 0.25);
+}
+
+.right-cloud {
+    transform: translateX(100%);
+    border-radius: 40% 0 0 40% / 50% 0 0 50%;
+    box-shadow: -15px 0 30px rgba(0, 0, 0, 0.25);
+}
+
+.cloud-curtain.active .left-cloud { transform: translateX(0); }
+.cloud-curtain.active .right-cloud { transform: translateX(0); }
+
+/* ==========================================================================
+   5. MOBILE FLUID VERTICAL SCROLL SNAP TIMELINE
+   ========================================================================== */
+.scroll-container {
+    height: 100vh;
+    width: 100%;
+    overflow-y: scroll;
+    scroll-snap-type: y mandatory;
+    position: relative;
+    z-index: 5;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+}
+.scroll-container::-webkit-scrollbar { 
+    display: none; 
+}
+
+.scroll-section {
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 16px;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    position: relative;
+    background: transparent;
+}
+
+.arcade-bg {
+    background: rgba(0, 0, 0, 0.25);
+    border-top: 1px solid rgba(223, 192, 149, 0.15);
+}
+
+/* ==========================================================================
+   6. INTERSTITIAL VIEWPORT SCROLL SNAP ENGINES FOR INTERIOR GATEWAYS
+   ========================================================================== */
+.dashboard-scroll-snapper {
+    width: 100%;
+    height: 100%;
+    overflow-y: scroll;
+    scroll-snap-type: y mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    z-index: 6;
+    position: relative;
+}
+.dashboard-scroll-snapper::-webkit-scrollbar { display: none; }
+
+.snap-viewport-view {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    padding: 16px;
+    position: relative;
+}
+
+.splash-welcome-panel {
+    background: rgba(99, 38, 67, 0.8) !important;
+    border: 1px solid rgba(232, 165, 152, 0.45) !important;
+    max-width: 590px;
+}
+
+.text-center-forced {
+    text-align: center !important;
+}
+
+.welcome-chronicle-text-box {
+    text-align: center;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: var(--text-light);
+    max-height: 360px;
+    overflow-y: auto;
+    padding-right: 4px;
+}
+.welcome-chronicle-text-box::-webkit-scrollbar { width: 4px; }
+.welcome-chronicle-text-box::-webkit-scrollbar-thumb { background: var(--soft-rose); border-radius: 4px; }
+
+.dynamic-glow-hint {
+    color: var(--champagne-gold);
+    animation: bounceHint 2.5s infinite ease-in-out, goldenGlow 2s infinite alternate;
+}
+@keyframes goldenGlow {
+    from { text-shadow: 0 0 2px rgba(223, 192, 149, 0.4); }
+    to { text-shadow: 0 0 10px rgba(223, 192, 149, 0.8), 0 0 20px var(--soft-rose); }
+}
+
+/* ==========================================================================
+   7. PREMIUM FROSTED SEALS & TIMER CARDS
+   ========================================================================== */
+.glass-seal-card {
+    background: var(--glass-fill);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid var(--glass-border);
+    padding: 60px 40px;
+    border-radius: 24px;
+    text-align: center;
+    width: 100%;
+    max-width: 540px;
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.45);
+}
+
+.initials-badge {
+    width: 100px;
+    height: 100px;
+    background: linear-gradient(135deg, var(--champagne-gold), #b8976c);
+    border-radius: 50%;
+    margin: 0 auto 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Cinzel', serif;
+    font-size: 1.8rem;
+    color: var(--velvet-wine);
+    font-weight: 700;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+.mini-gold {
+    width: 60px;
+    height: 60px;
+    font-size: 1.4rem;
+    margin-bottom: 15px;
+}
+
+.seal-subtitle {
+    font-size: 0.75rem;
+    letter-spacing: 4px;
+    color: var(--soft-rose);
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.main-announcement {
+    font-family: 'Cinzel', serif;
+    font-size: 1.7rem;
+    color: var(--pure-white);
+    margin-bottom: 20px;
+    line-height: 1.35;
+}
+
+.countdown-grid {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 25px;
+}
+
+.time-box {
+    display: flex;
+    flex-direction: column;
+    min-width: 65px;
+    background: rgba(0, 0, 0, 0.35);
+    padding: 8px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.time-box span {
+    font-size: 1.8rem;
+    font-weight: 300;
+    color: var(--pure-white);
+}
+
+.time-box label {
+    font-size: 0.6rem;
+    color: var(--soft-rose);
+    letter-spacing: 1px;
+    margin-top: 2px;
+}
+
+.footer-note {
+    font-size: 0.8rem;
+    opacity: 0.8;
+    color: var(--warm-blush);
+}
+
+.scroll-hint {
+    margin-top: 20px;
+    font-size: 0.75rem;
+    color: var(--champagne-gold);
+    letter-spacing: 1px;
+    animation: bounceHint 2s infinite;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+@keyframes bounceHint {
+    0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+    40% { transform: translateY(-4px); }
+    60% { transform: translateY(-2px); }
+}
+
+/* ==========================================================================
+   8. WARM ROMANTIC PINK STAGE STYLING & MACHINE FLIGHT VECTORS
+   ========================================================================== */
+.horizon-screen-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 10;
+    display: none;
+    background: radial-gradient(circle at center, #632643 0%, #401429 100%);
+    overflow: hidden;
+}
+.horizon-screen-container.active {
+    display: block;
+}
+
+.sky-machine-float {
+    text-align: center;
+    cursor: pointer;
+    z-index: 5;
+    position: relative;
+}
+
+.flying-machine-graphics {
+    font-size: 6rem;
+    position: relative;
+    display: inline-block;
+    animation: machineFloat 4s infinite ease-in-out;
+    transition: transform 1.2s cubic-bezier(0.6, -0.28, 0.735, 0.045), opacity 0.5s ease;
+}
+
+.machine-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 120px;
+    height: 120px;
+    background: var(--champagne-gold);
+    filter: blur(35px);
+    opacity: 0.3;
+    z-index: -1;
+    border-radius: 50%;
+}
+
+.engine-thruster-fire {
+    position: absolute;
+    bottom: 5px;
+    left: 50%;
+    transform: translateX(-50%) scaleY(0);
+    width: 20px;
+    height: 40px;
+    background: linear-gradient(to bottom, #fff, #ffae42, rgba(255,0,0,0));
+    border-radius: 50%;
+    transform-origin: top center;
+    transition: transform 0.3s ease;
+    filter: blur(1px);
+}
+
+.machine-hint-text {
+    margin-top: 20px;
+    font-family: 'Cinzel', serif;
+    color: var(--champagne-gold);
+    letter-spacing: 2px;
+    font-size: 0.85rem;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+}
+
+@keyframes machineFloat {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-15px) rotate(2deg); }
+}
+
+.sky-machine-float.flight-warp .flying-machine-graphics {
+    animation: none;
+    transform: translateY(-1200px) scale(0.2);
+    opacity: 0;
+}
+.sky-machine-float.flight-warp .engine-thruster-fire {
+    transform: translateX(-50%) scaleY(3.5);
+}
+
+/* ==========================================================================
+   9. ONBOARDING OVERLAY MODAL CARDS & JUKEBOX TRACK MANAGEMENT STYLES
+   ========================================================================== */
+.horizon-modal-box {
+    position: absolute;
+    background: rgba(44, 22, 31, 0.96);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+    padding: 30px 20px;
+    border-radius: 20px;
+    width: 90%;
+    max-width: 380px;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
+    display: none;
+    z-index: 1000;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.horizon-modal-box.open {
+    display: block;
+}
+
+.horizon-card-body h3 {
+    font-family: 'Cinzel', serif;
+    color: var(--champagne-gold);
+    margin-bottom: 10px;
+    font-size: 1.3rem;
+}
+
+.horizon-card-body p {
+    font-size: 0.8rem;
+    opacity: 0.8;
+    line-height: 1.4;
+    margin-bottom: 15px;
+}
+
+.music-prompt-label {
+    font-size: 0.8rem;
+    color: var(--soft-rose);
+    margin: 20px 0 8px;
+    font-weight: 500;
+}
+
+.music-selection-grid { 
+    display: flex; 
+    flex-direction: column; 
+    gap: 8px; 
+    margin-bottom: 20px; 
+    max-height: 180px; 
+    overflow-y: auto; 
+    padding-right: 4px; 
+}
+.music-selection-grid::-webkit-scrollbar { width: 4px; }
+.music-selection-grid::-webkit-scrollbar-thumb { background: rgba(223, 192, 149, 0.3); border-radius: 4px; }
+
+.music-track-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+}
+.music-chip { padding: 12px; border-radius: 12px; background: rgba(0, 0, 0, 0.3); border: 1px solid rgba(255, 255, 255, 0.08); color: white; text-align: left; font-size: 0.85rem; cursor: pointer; flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.music-chip.active { border-color: var(--champagne-gold); background: rgba(223, 192, 149, 0.15); color: var(--champagne-gold); font-weight: 600; }
+
+.audio-delete-bin-btn {
+    background: rgba(255, 77, 77, 0.15);
+    border: 1px solid #ff4d4d;
+    color: #ff4d4d;
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 1rem;
+    flex-shrink: 0;
+    transition: all 0.2s ease;
+}
+.audio-delete-bin-btn:active { transform: scale(0.92); background: #ff4d4d; color: white; }
+
+.baazigar-audio-manager-box {
+    background: rgba(0, 0, 0, 0.35);
+    padding: 12px;
+    border-radius: 14px;
+    border: 1px solid rgba(232, 165, 152, 0.2);
+    margin-top: 15px;
+    text-align: left;
+}
+.baazigar-audio-manager-box label { font-size: 0.75rem; color: var(--soft-rose); font-weight: 500; display: block; margin-bottom: 4px; }
+
+.aesthetic-input {
+    width: 100%;
+    padding: 12px 20px;
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid var(--champagne-gold);
+    border-radius: 30px;
+    color: white;
+    text-align: center;
+    outline: none;
+    font-size: 0.95rem;
+}
+
+/* ==========================================================================
+   10. BAAZIGAR PATH INLINE COMPONENT CONTROLS
+   ========================================================================== */
+.inline-admin-controls {
+    display: flex;
+    justify-content: space-between;
+    gap: 6px;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.admin-edit-toggle-btn, .admin-add-card-btn {
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid var(--champagne-gold);
+    padding: 8px 6px;
+    border-radius: 15px;
+    color: var(--champagne-gold);
+    font-size: 0.72rem;
+    font-weight: 600;
+    cursor: pointer;
+    flex: 1;
+    transition: all 0.2s ease;
+    text-align: center;
+}
+
+.admin-edit-toggle-btn:active, .admin-add-card-btn:active {
+    background: var(--champagne-gold);
+    color: var(--text-dark);
+}
+
+.inline-editor-form-box {
+    display: none;
+    background: rgba(44, 13, 27, 0.5);
+    padding: 16px;
+    border-radius: 16px;
+    margin-bottom: 20px;
+    text-align: left;
+    width: 100%;
+    border: 1px solid rgba(232, 165, 152, 0.2);
+}
+.inline-editor-form-box.open {
+    display: block;
+}
+
+.inline-editor-form-box label {
+    display: block;
+    font-size: 0.75rem;
+    color: var(--soft-rose);
+    margin-top: 10px;
+    margin-bottom: 4px;
+    font-weight: 500;
+}
+
+.inline-editor-form-box textarea {
+    width: 100%;
+    padding: 12px;
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid var(--champagne-gold);
+    border-radius: 12px;
+    color: white;
+    font-size: 0.85rem;
+    outline: none;
+    resize: none;
+    margin-bottom: 12px;
+}
+
+.text-left {
+    text-align: left !important;
+}
+
+/* ==========================================================================
+   11. PHASE 4 & 4B: ROMANTIC WARM PINK PPT PRESENTATION SLIDES
+   ========================================================================== */
+.journal-slide-view {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    padding: 16px;
+    z-index: 15;
+    top: 0;
+    left: 0;
+}
+.journal-slide-view.active {
+    display: flex;
+}
+
+.slide-card.glass-seal-card {
+    background: rgba(99, 38, 67, 0.75) !important;
+    border: 1px solid rgba(232, 165, 152, 0.4) !important;
+    box-shadow: 0 20px 45px rgba(44, 13, 27, 0.6) !important;
+    max-width: 580px !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.slide-content-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    align-items: center;
+    width: 100%;
+}
+
+.slide-graphic-box {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2.5px solid var(--glass-border);
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.4);
+}
+
+.slide-graphic-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.slide-text-box {
+    width: 100%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.romantic-heading {
+    font-family: 'Cinzel', serif;
+    color: var(--champagne-gold);
+    font-size: 1.6rem;
+    margin-bottom: 10px;
+    border-bottom: 1px solid rgba(223, 192, 149, 0.2);
+    padding-bottom: 6px;
+}
+
+/* DYNAMIC SCROLLBAR ACTIVATION ZONE FOR EXTENDED TEXT CHRONICLES */
+.chronicle-text-scroll-container {
+    width: 100%;
+    max-height: 260px;
+    overflow-y: auto;   
+    padding-right: 6px;
+    text-align: center;
+    -webkit-overflow-scrolling: touch; 
+}
+.chronicle-text-scroll-container::-webkit-scrollbar {
+    width: 5px;
+}
+.chronicle-text-scroll-container::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+}
+.chronicle-text-scroll-container::-webkit-scrollbar-thumb {
+    background: var(--soft-rose);
+    border-radius: 10px;
+}
+
+#slideGuestMessage {
+    font-size: 0.88rem;
+    line-height: 1.6;
+    opacity: 0.95;
+    font-weight: 300;
+    white-space: pre-wrap;
+    color: var(--text-light);
+}
+
+.slideshow-controls {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 15px;
+    width: 100%;
+}
+
+/* ==========================================================================
+   12. INTERACTIVE NAVIGATION ACTIONS BUTTONS
+   ========================================================================== */
+.premium-btn {
+    padding: 12px 26px;
+    border-radius: 30px;
+    border: none;
+    font-weight: 600;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    display: inline-block;
+    transition: all 0.2s ease;
+}
+
+.premium-btn.gold { background: var(--champagne-gold); color: var(--text-dark); }
+.premium-btn.gold:active { transform: scale(0.96); }
+
+.premium-btn.rose { background: var(--soft-rose); color: var(--pure-white); }
+.premium-btn.rose:active { transform: scale(0.96); }
+
+.premium-btn.full-width {
+    width: 100%;
+    text-align: center;
+}
+
+.round-nav {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.1rem;
+    padding: 0;
+}
+
+/* ==========================================================================
+   13. TWIN PIANO RHYTHM ARCADE MATRIX SYSTEMS
+   ========================================================================== */
+.game-wrapper {
+    width: 100%;
+    max-width: 430px;
+    text-align: center;
+    position: relative;
+}
+
+.game-wrapper.context-home {
+    background: rgba(61, 19, 38, 0.45);
+    padding: 24px 18px;
+    border-radius: 24px;
+    border: 1px solid var(--champagne-gold);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+
+.game-meta h2 {
+    font-family: 'Cinzel', serif;
+    color: var(--champagne-gold);
+    margin-bottom: 4px;
+    font-size: 1.4rem;
+}
+
+.game-meta p {
+    font-size: 0.78rem;
+    color: var(--soft-rose);
+    margin-bottom: 15px;
+}
+
+.piano-board {
+    width: 100%;
+    height: 420px; 
+    background: rgba(0, 0, 0, 0.65);
+    border: 2px solid var(--glass-border);
+    border-radius: 16px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+}
+
+.game-hearts-overlay {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    display: flex;
+    gap: 4px;
+    z-index: 10;
+    font-size: 1.1rem;
+}
+
+.piano-lane {
+    flex: 1;
+    height: 100%;
+    border-right: 1px solid rgba(223, 192, 149, 0.08);
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding-bottom: 15px;
+}
+.piano-lane:last-child {
+    border-right: none;
+}
+
+.key-bind {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.15);
+    font-weight: 600;
+}
+
+.piano-tile {
+    position: absolute;
+    width: 92%;
+    left: 4%;
+    height: 75px;
+    background: linear-gradient(to bottom, #722649, #4a132e);
+    border: 1px solid var(--soft-rose);
+    border-radius: 8px;
+    top: -75px;
+    will-change: transform;
+}
+
+.judgment-line {
+    position: absolute;
+    top: 70%;
+    transform: translateY(-50%);
+    left: 0;
+    width: 100%;
+    height: 6px;
+    background: var(--champagne-gold);
+    box-shadow: 0 0 12px var(--champagne-gold), 0 0 4px var(--pure-white);
+    pointer-events: none;
+    z-index: 4;
+}
+
+.lose-line {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: #ff4d4d;
+    box-shadow: 0 0 8px #ff4d4d;
+    pointer-events: none;
+    z-index: 4;
+}
+
+@pragma popupFade keyframe hook;
+@keyframes popupFade {
+    0% { opacity: 0; transform: translate(-50%, 15px) scale(0.85); }
+    50% { opacity: 1; transform: translate(-50%, -5px) scale(1.05); }
+    100% { opacity: 0; transform: translate(-50%, -20px) scale(1); }
+}
+
+.tutorial-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(27, 7, 16, 0.98);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+    padding: 16px;
+    text-align: center;
+}
+
+.tutorial-content h3 {
+    font-family: 'Cinzel', serif;
+    color: var(--champagne-gold);
+    margin-bottom: 12px;
+    font-size: 1.25rem;
+}
+
+.tutorial-content p {
+    font-size: 0.85rem;
+    margin-bottom: 20px;
+    color: var(--warm-blush);
+    line-height: 1.5;
+}
+
+.game-controls-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 12px 0;
+    padding: 0 4px;
+}
+
+.score-display {
+    font-size: 1.15rem;
+    color: var(--champagne-gold);
+    font-family: 'Cinzel', serif;
+    font-weight: 600;
+}
+
+/* ==========================================================================
+   14. MASTER LEADERBOARD SCROLL STACKS
+   ========================================================================== */
+.leaderboard-box {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    padding: 14px;
+    border-radius: 14px;
+    text-align: left;
+    margin-top: 10px;
+    max-height: 140px;
+    overflow-y: auto;
+}
+
+.leaderboard-box h4 {
+    text-align: center;
+    color: var(--champagne-gold);
+    font-size: 0.85rem;
+    margin-bottom: 8px;
+    font-family: 'Cinzel', serif;
+}
+
+.leaderboard-box ul {
+    list-style: none;
+    font-size: 0.8rem;
+}
+
+.leaderboard-box li {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+    color: rgba(255, 255, 255, 0.9);
+}
+.leaderboard-box li:last-child {
+    border-bottom: none;
+}
+
+/* ==========================================================================
+   15. PHASE 5: STANDALONE ARCADE STAGE CONTAINER VIEWPORT
+   ========================================================================== */
+.arcade-final-viewport {
+    position: fixed;
+    top: 100vh;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: radial-gradient(circle at center, #260b18 0%, #12030a 100%);
+    z-index: 100;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 1s cubic-bezier(0.77, 0, 0.175, 1);
+    padding: 16px;
+}
+
+.arcade-final-viewport.slide-up-active {
+    transform: translateY(-100vh);
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ==========================================================================
+   16. DEVICE GEOMETRIC DISPLAY ADJUSTMENT FILTERS (MOBILE SCALING)
+   ========================================================================== */
+@media (max-height: 680px) {
+    .piano-board { height: 360px; }
+    .piano-tile { height: 65px; top: -65px; }
+    .initials-badge { width: 85px; height: 85px; font-size: 1.5rem; margin-bottom: 12px; }
+    .main-announcement { font-size: 1.4rem; margin-bottom: 15px; }
+    .slide-graphic-box { width: 120px; height: 120px; }
+    .romantic-heading { font-size: 1.3rem; margin-bottom: 6px; }
+    .chronicle-text-scroll-container { max-height: 100px; }
+}
+
+@media (max-width: 360px) {
+    .countdown-grid { gap: 8px; }
+    .time-box { min-width: 58px; padding: 6px; }
+    .time-box span { font-size: 1.5rem; }
+    .premium-btn { padding: 10px 20px; font-size: 0.8rem; }
+}
+/* ==========================================================================
+   SPACESHIP FLYING WARP ANIMATION
+   ========================================================================== */
+@keyframes spaceshipWarpFlight {
+    0% {
+        transform: translateY(0) scale(1) rotate(0deg);
+        opacity: 1;
+    }
+    30% {
+        transform: translateY(30px) scale(1.05) rotate(-3deg);
+        filter: drop-shadow(0 0 15px var(--champagne-gold));
+    }
+    100% {
+        transform: translateY(-1000px) scale(0.1) rotate(15deg);
+        opacity: 0;
+    }
+}
+
+.sky-machine-float.triggered-flight .flying-machine-graphics {
+    animation: spaceshipWarpFlight 1.2s cubic-bezier(0.6, -0.28, 0.735, 0.045) forwards !important;
+}
+
+.sky-machine-float.triggered-flight .engine-thruster-fire {
+    transform: translateX(-50%) scaleY(4.5) !important;
+    opacity: 1;
+}
+/* ==========================================================================
+   EASY DISPLAY UPGRADE & MOBILE SCREEN FIX
+   ========================================================================== */
+
+/* 1. Makes all text wrap perfectly without going off the screen right side */
+.glass-seal-card, 
+.splash-welcome-panel, 
+.slide-card.glass-seal-card,
+.welcome-chronicle-text-box, 
+.chronicle-text-scroll-container,
+#slideGuestMessage {
+    width: 100% !important;
+    box-sizing: border-box;
+    word-wrap: break-word;
+    white-space: normal;
+    overflow-x: hidden;
+}
+
+/* 2. Makes all the boxes much bigger on computer/tablet screens */
+.glass-seal-card {
+    max-width: 540px;
+    padding: 45px 35px;
+}
+.splash-welcome-panel {
+    max-width: 580px;
+}
+.welcome-chronicle-text-box {
+    max-height: 360px;
+    font-size: 0.95rem;
+}
+.slide-card.glass-seal-card {
+    max-width: 580px !important;
+}
+.chronicle-text-scroll-container {
+    max-height: 260px;
+}
+
+/* 3. Automatically shrinks the boxes perfectly to fit mobile phone screens */
+@media (max-height: 680px) or (max-width: 600px) {
+    .glass-seal-card, 
+    .splash-welcome-panel, 
+    .slide-card.glass-seal-card {
+        max-width: 100% !important;
+        padding: 24px 16px;
+    }
+    .piano-board { height: 360px; }
+    .piano-tile { height: 65px; top: -65px; }
+    .initials-badge { width: 75px; height: 75px; font-size: 1.3rem; margin-bottom: 12px; }
+    .main-announcement { font-size: 1.25rem; margin-bottom: 12px; }
+    .romantic-heading { font-size: 1.2rem; margin-bottom: 6px; }
+    .chronicle-text-scroll-container { max-height: 160px; } 
+    .welcome-chronicle-text-box { max-height: 220px; } 
+}
